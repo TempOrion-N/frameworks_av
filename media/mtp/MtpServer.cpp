@@ -249,23 +249,6 @@ void MtpServer::sendObjectUpdated(MtpObjectHandle handle) {
     sendEvent(MTP_EVENT_OBJECT_PROP_CHANGED, handle);
 }
 
-MtpStorage* MtpServer::getStorageLocked(MtpStorageID id) {
-    if (id == 0)
-        return mStorages.empty() ? NULL : mStorages[0];
-    for (size_t i = 0; i < mStorages.size(); i++) {
-        MtpStorage* storage = mStorages[i];
-        if (storage->getStorageID() == id)
-            return storage;
-    }
-    return NULL;
-}
-
-bool MtpServer::hasStorage(MtpStorageID id) {
-    if (id == 0 || id == 0xFFFFFFFF)
-        return mStorages.size() > 0;
-    return (getStorageLocked(id) != NULL);
-}
-
 void MtpServer::sendStoreAdded(MtpStorageID id) {
     ALOGV("sendStoreAdded %08X\n", id);
     sendEvent(MTP_EVENT_STORE_ADDED, id);
