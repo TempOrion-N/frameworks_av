@@ -26,6 +26,9 @@
 #include <camera/CameraParameters.h>
 #include <system/window.h>
 #include "hardware/camera.h"
+#ifdef USE_MEMORY_HEAP_ION
+#include <binder/MemoryHeapIon.h>
+#endif
 
 namespace android {
 
